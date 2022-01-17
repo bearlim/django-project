@@ -1,6 +1,4 @@
-from dataclasses import field
-from operator import mod
-from pyexpat import model
+from tabnanny import verbose
 from django.db import models
 
 class NotaFiscalManager(models.Manager):
@@ -31,10 +29,10 @@ class tbNOTAFISCAL(models.Model):
     dsTipoLogradouroTomador = models.CharField('Tipo logradouro do Tomador', max_length = 50)
     dsEnderecoTomador = models.CharField('Endereço do Tomador', max_length = 255)
     dsTipoBairroTomador = models.CharField('Tipo do bairro do Tomador', max_length = 100)
-    cdCidadeTomador = models.CharField(max_length = 150)
-    sgEstadoTomador = models.CharField(max_length = 50)
-    nrEnderecoTomador = models.IntegerField()    
-    dsBairroTomador = models.CharField(max_length = 150) 
+    cdCidadeTomador = models.CharField('Cidade do Tomador',max_length = 150)
+    sgEstadoTomador = models.CharField('Estado do Tomador', max_length = 50)
+    nrEnderecoTomador = models.IntegerField('Número do endereço do Tomador')    
+    dsBairroTomador = models.CharField('Bairro do Tomador', max_length = 150) 
     urlPDF = models.CharField(max_length = 255, null=True, blank=True)
     urlXML = models.CharField(max_length = 255, null=True, blank=True)    
     
@@ -47,6 +45,10 @@ class tbNOTAFISCAL(models.Model):
 
     def __str__(self) -> str:
         return self.dsDiscriminacao
+
+    class Meta:
+        verbose_name = "Nota Fiscal"
+        verbose_name_plural = "Notas Fiscais"
 
 class tbNOTAFISCALERRO(models.Model):
     idErro = models.IntegerField(primary_key=True)
