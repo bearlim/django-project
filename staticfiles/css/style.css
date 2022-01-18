@@ -1,0 +1,28 @@
+.container_edit{
+    border-radius: 25px;
+}
+
+.background_text {
+    background-color: black;
+    color: white;
+    font-size: 45px;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+#slogan {
+    margin-top: 100px;
+    margin-left: 15px;
+    font-size: 35px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    color: white;
+}
+
+footer{
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
