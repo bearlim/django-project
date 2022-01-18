@@ -1,0 +1,9 @@
+# Ignorando todos os arquivos de log
+*.log
+
+# Ignorando arquivos da IDE
+.idea
+
+# Ignorando arquivos de cache
+/core/__pycache__
+/djangoproject/__pycache__
