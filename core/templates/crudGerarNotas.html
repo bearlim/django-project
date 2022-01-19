@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>FUNCIONA, POR FAVOR</p>
+    <div class="container bg-white text-dark container_edit p-5 m-10">
+        <h1>Gerar Nota Fiscal!</h1>            
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row" id="teste">
+                <div class="col-md-12 pt-2">
+                    <div class="card border">
+                        <div class="card-body">
+                            <h5 class="card-title border bg-danger p-2"><i class="fa fa-exclamation-triangle"></i><b>IMPORTANTE!</b></h5>
+                            <p class="card-text">NOTAS GERADAS NÃO POSSUEM VALOR FISCAL</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                {% for field in form %}
+                <div class="col-md-6 p-3">
+                    <div class="form-group input-group">
+                        <span class="input-group-text">
+                            {{ field.label_tag }}
+                        </span>
+                        {{ field }}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-md-3 mt-5">
+                    <button type="submit" class="btn btn-primary">Enviar Nota</button>
+                </div>
+            </div>            
+        </form>
+    </div>    
 {% endblock content %}
+
+
     

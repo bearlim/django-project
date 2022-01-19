@@ -15,7 +15,7 @@ class tbNOTAFISCAL(models.Model):
 
     # Dados de serviço
     cdServico = models.CharField('Código de Serviço',max_length = 150)
-    cdTributacao = models.CharField('Código de Tributação', max_length = 150)
+    cdTributacao = models.CharField('Código de Tributação', max_length = 150, blank=True)
     dsDiscriminacao = models.CharField(max_length = 150)
     cdCNAE = models.CharField('Código CNAE',max_length = 150, blank=True)    
     vrServico = models.FloatField('Valor do Serviço')

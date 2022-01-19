@@ -3,86 +3,74 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" href="{% static 'icon.png' %}" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'icon.png' %}" type="image/x-icon">
 </head>
 
 <body style="background-image: url({% static 'images/background.jpg' %})">
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="container-fluid" id="barraDeNavagacao">
-            <a class="navbar-brand" href="#home">
-                <img src="{% static 'logonfe.png' %}" alt="Ícone" style="width: 45px; border-radius: 50px;">
-            </a>
-            <br>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container-fluid" id="barraDeNavagacao">
+      <a class="navbar-brand" href="#home">
+        <img src="{% static 'logonfe.png' %}" alt="Ícone" style="width: 45px; border-radius: 50px;">
+      </a>
+      <br>
 
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link text-white" id="home" href="{% url 'index' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" id="gerarNota" href="{% url 'gerarNota' %}">Gerar Nota</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" id="notasGera" href="{% url 'notasGeradas' %}">Notas Geradas</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container-fluid mt-2">
-
-        {% block content %}
-
-        {% endblock %}
-
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link text-white" id="home" href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" id="gerarNota" href="{% url 'gerarNota' %}">Gerar Nota</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" id="notasGera" href="{% url 'notasGeradas' %}">Notas Geradas</a>
+        </li>
+      </ul>
     </div>
+  </nav>
+  <div class="container-fluid mt-2 fixed-center">
 
- <!-- Remove the container if you want to extend the Footer to full width. -->
- <div class="row">
-    <div class="my-5">
+    {% block content %}
 
-        <footer class="bg-dark text-center text-white">
-        <!-- Grid container -->
+    {% endblock %}
+
+  </div>
+
+  <!-- <div class="row fixed-bottom">
+    <div class="my">
+
+      <footer class="footer bg-dark text-center text-white" style="z-index: 0;">
         <div class="container p-4 pb-0">
-          <!-- Section: Social media -->
           <section class="mb-4">
-            <!-- Instagram -->
-            <a class="btn btn-outline-light btn-floating m-1" title="Instagram" href="https://www.instagram.com/bearlim_/" target="_blank" role="button"
-              ><i class="fab fa-instagram"></i
-            ></a>
-      
-            <!-- Linkedin -->
-            <a class="btn btn-outline-light btn-floating m-1" title="Linkedin" href="https://www.linkedin.com/in/yuri-pereira-74010b204/" target="_blank" role="button"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-      
-            <!-- Github -->
-            <a class="btn btn-outline-light btn-floating m-1" title="Github" href="https://github.com/bearlim" role="button"
-              ><i class="fab fa-github"></i
-            ></a>
+            <a class="btn btn-outline-light btn-floating m-1" title="Instagram"
+              href="https://www.instagram.com/bearlim_/" target="_blank" role="button"><i
+                class="fab fa-instagram"></i></a>
+
+            <a class="btn btn-outline-light btn-floating m-1" title="Linkedin"
+              href="https://www.linkedin.com/in/yuri-pereira-74010b204/" target="_blank" role="button"><i
+                class="fab fa-linkedin-in"></i></a>
+
+            <a class="btn btn-outline-light btn-floating m-1" title="Github" href="https://github.com/bearlim"
+              role="button"><i class="fab fa-github"></i></a>
           </section>
-          <!-- Section: Social media -->
         </div>
-        <!-- Grid container -->
-      
-        <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2020 Copyright:
           <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
-        <!-- Copyright -->
       </footer>
-        
-      </div>
- </div>
+
+    </div> -->
 </body>
 
 </html>

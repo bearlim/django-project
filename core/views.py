@@ -5,13 +5,24 @@ from django.shortcuts import render
 
 # Importando model
 from .models import tbNOTAFISCAL as NF
+# Importando form
+from .forms import gerarNotaFiscal
 
 def index(request):
     return render(request, 'index.html')
 
 # Função irá trazer modal para realizar a emissão de notas
 def gerarNota(request):
-    return render(request, 'crudGerarNotas.html')
+
+    if request.method == 'POST':
+        form = gerarNotaFiscal(request.POST)
+    else:
+        form = gerarNotaFiscal()
+    
+    context = {
+        'form': form,
+    }
+    return render(request, 'crudGerarNotas.html', context)
 
 # Função irá puxar todas as notas que estão salvas no banco de dados
 def notasGeradas(request):
