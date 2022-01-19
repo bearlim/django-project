@@ -5,5 +5,7 @@
 .idea
 
 # Ignorando arquivos de cache
-/core/__pycache__
-/djangoproject/__pycache__
+core/__pycache__/*
+djangoproject/__pycache__/*
+
+# Ignorando arquivos pyc
