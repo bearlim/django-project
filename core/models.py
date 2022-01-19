@@ -11,6 +11,7 @@ class NotaFiscalManager(models.Manager):
 # Create your models here.
 class tbNOTAFISCAL(models.Model):
     idNFE = models.IntegerField(primary_key=True)
+    idRetorno = models.CharField(null=True, max_length=255)
 
     # Dados de serviço
     cdServico = models.CharField('Código de Serviço',max_length = 150)
