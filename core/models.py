@@ -1,5 +1,5 @@
-from tabnanny import verbose
 from django.db import models
+from django.forms import ModelForm
 
 class NotaFiscalManager(models.Manager):
     def pesquisar(self, query):
@@ -60,3 +60,4 @@ class tbNOTAFISCALERRO(models.Model):
 
     def __str__(self) -> str:
         return self.dsErro
+

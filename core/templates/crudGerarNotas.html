@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <script>
+        $(document).ready(function(){
+            $('.cdCEP').mask('99999-999');            
+        })
+    </script>
     <div class="container bg-white text-dark container_edit p-5 m-10">
         <h1>Gerar Nota Fiscal!</h1>            
         <form action="" method="post">

@@ -1,4 +1,7 @@
+from re import A
 from django import forms
+from django.forms import ModelForm, TextInput 
+from . import models
 
 class gerarNotaFiscal(forms.Form):
     cdServico = forms.CharField(label='Código de Serviço', max_length=150, \
@@ -23,3 +26,39 @@ class gerarNotaFiscal(forms.Form):
     sgEstadoTomador = forms.CharField(label='Estado do Tomador', max_length = 50, widget=forms.TextInput(attrs={'class': 'form-control'}))
     nrEnderecoTomador = forms.IntegerField(label='Número do endereço do Tomador', widget=forms.TextInput(attrs={'class': 'form-control'}))
     dsBairroTomador = forms.CharField(label='Bairro do Tomador', max_length = 150, widget=forms.TextInput(attrs={'class': 'form-control'})) 
+
+
+
+class FormGerarNota(ModelForm):
+    class Meta:
+        model = models.tbNOTAFISCAL
+        fields = [
+            'cdServico',
+            'cdTributacao',
+            'dsDiscriminacao',
+            'cdCNAE',
+            'vrServico',
+            'vrLiquido',
+            'cdCNPJPrestador',
+            'cdCPFTomador',
+            'cdCEPTomador',
+            'dsTipoLogradouroTomador',
+            'dsEnderecoTomador',
+            'dsTipoBairroTomador',
+            'cdCidadeTomador',
+            'sgEstadoTomador',
+            'nrEnderecoTomador',
+            'dsBairroTomador'            
+        ]
+        widgets = { }  
+        for field in fields:
+            if field == 'cdCEPTomador':
+                widgets.update({field : TextInput(attrs={'class': 'form-control cdCEP'})})
+            elif field == 'vrServico' or field == 'vrLiquido':
+                widgets.update({field : TextInput(attrs={'class': 'form-control money'})})
+            else:
+                widgets.update({field : TextInput(attrs={'class': 'form-control'})})
+        labels = {
+            'cdServico' : 'Código de Serviço',
+            'dsDiscriminacao': 'Discriminação'
+        }
