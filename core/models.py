@@ -9,6 +9,10 @@ class NotaFiscalManager(models.Manager):
         )
 
 # Create your models here.
+class teste(models.Model):
+    idNFE = models.IntegerField(primary_key=True)
+    ds = models.CharField(max_length=150, blank=True, null=True)
+
 class tbNOTAFISCAL(models.Model):
     idNFE = models.IntegerField(primary_key=True)
     idRetorno = models.CharField(null=True, max_length=255)
@@ -18,8 +22,8 @@ class tbNOTAFISCAL(models.Model):
     cdTributacao = models.CharField('Código de Tributação', max_length = 150, blank=True)
     dsDiscriminacao = models.CharField(max_length = 150)
     cdCNAE = models.CharField('Código CNAE',max_length = 150, blank=True)    
-    vrServico = models.FloatField('Valor do Serviço')
-    vrLiquido = models.FloatField('Valor líquido do Serviço')
+    vrServico = models.DecimalField('Valor do Serviço', max_digits=12, decimal_places=2)
+    vrLiquido = models.DecimalField('Valor líquido do Serviço', max_digits=12, decimal_places=2)
 
     # Dados do prestador
     cdCNPJPrestador = models.CharField('CNPJ do Prestador',max_length = 255)

@@ -1,6 +1,4 @@
-from distutils.command.install_egg_info import safe_name
-from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Importando model
 from .models import tbNOTAFISCAL as NF
@@ -15,13 +13,14 @@ def index(request):
 def gerarNota(request):
     context = {}
     if request.method == 'POST':
-        form = FormGerarNota(request.POST)
-        print(form.is_valid())
-        if form.is_valid():
-            print(form.visible_fields())
-            json = montarJson(form)
+        form = FormGerarNota(request.POST)                        
+        if form.is_valid():            
+            formX = form.save()
+            print(formX.idNFE)
+            json = montarJson(formX)
             form = FormGerarNota()
-    else:
+            return  redirect('/notasGeradas/')
+    else:        
         context = {
             'form': FormGerarNota()
         }

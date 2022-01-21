@@ -55,7 +55,7 @@ class FormGerarNota(ModelForm):
             if field == 'cdCEPTomador':
                 widgets.update({field : TextInput(attrs={'class': 'form-control cdCEP'})})
             elif field == 'vrServico' or field == 'vrLiquido':
-                widgets.update({field : TextInput(attrs={'class': 'form-control money'})})
+                widgets.update({field : TextInput(attrs={'class': 'form-control money', 'type' : 'number'})})
             else:
                 widgets.update({field : TextInput(attrs={'class': 'form-control'})})
         labels = {

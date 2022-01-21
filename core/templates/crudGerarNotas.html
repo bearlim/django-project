@@ -3,7 +3,9 @@
 {% block content %}
     <script>
         $(document).ready(function(){
-            $('.cdCEP').mask('99999-999');            
+            $('.cdCEP').mask('99999-999');      
+            
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
         })
     </script>
     <div class="container bg-white text-dark container_edit p-5 m-10">
@@ -25,6 +27,11 @@
                 </div>
                 {% for field in form %}
                 <div class="col-md-6 p-3">
+                    
+                    {% if form.has_erro %}
+                        form.errors.as_ul()
+                    {% endif %}
+                        
                     <div class="form-group input-group">
                         <span class="input-group-text">
                             {{ field.label_tag }}

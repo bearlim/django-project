@@ -1,4 +1,5 @@
 import requests
 
 def montarJson(form):
-    pass
+    print(form.cleaned_data['cdServico'])
+    print(form.data['idNFE'])
