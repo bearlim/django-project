@@ -2,13 +2,13 @@ from re import template
 from this import d
 from django.shortcuts import render, redirect
 from .control import Gerarjson
-
-# Importando módulo para não necessitar da verificação csrf
+from django.urls import reverse
+from django.views.generic import DetailView
 from django.views.decorators.csrf import csrf_exempt
-# Importando model
 from .models import tbNOTAFISCAL as NF
-# Importando form
 from .forms import FormGerarNota
+
+app_name = "core"
 
 def index(request):
     return render(request, 'index.html')
@@ -45,13 +45,32 @@ def notasGeradas(request):
 @csrf_exempt
 def abrirModalEnviarNota(request, idNFE):
     context = {}
-    form = NF.objects.get(idNFE=idNFE)
-    template_Name = ''
-    context = {
-        "form": form
-    }
+    
+    form = NF.objects.get(idNFE = idNFE)
+    template_name = 'crudNotasGeradas.html'
 
-    return render(request, template_Name, context)
+    context = {
+        'form': form
+    }
+    return render(request, template_name, context)
+
+class abrirModalEnviarNotaV2(DetailView):
+    model = NF
+    form = FormGerarNota
+
+    def get_form_kwargs(self):
+        kwargs = super(abrirModalEnviarNotaV2, self).get_form_kwargs()
+        kwargs['user'] = self.request.user.username
+        return kwargs
+
+    def post(self, request, *args, **kwargs):
+        form = FormGerarNota(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return redirect(reverse("abrirModalEnviarNotaV2", args=[post.pk]))
 
 
 def enviarNota(request, idNFE):

@@ -9,8 +9,8 @@ $('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function () {
         idNFE = $(this).attr('data-id');
 
     $.ajax({
-        type: "POST",
-        url: "/ModalEnviarNota/" + idNFE,
+        type: "GET",
+        url: "/ModalEnviarNotaV2/" + idNFE,
         data: idNFE,        
         success: function (response) {
             $(modal).modal('show');
