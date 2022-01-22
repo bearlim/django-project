@@ -1,10 +1,11 @@
+from this import d
 from django.shortcuts import render, redirect
+from .control import Gerarjson
 
 # Importando model
 from .models import tbNOTAFISCAL as NF
 # Importando form
 from .forms import FormGerarNota
-from .control import *
 
 def index(request):
     return render(request, 'index.html')
@@ -15,9 +16,7 @@ def gerarNota(request):
     if request.method == 'POST':
         form = FormGerarNota(request.POST)                        
         if form.is_valid():            
-            formX = form.save()
-            print(formX.idNFE)
-            json = montarJson(formX)
+            formX = form.save()                        
             form = FormGerarNota()
             return  redirect('/notasGeradas/')
     else:        
@@ -39,3 +38,21 @@ def notasGeradas(request):
     }
     # Retornando os parâmetros do Request
     return render(request, template_name, context)
+
+
+def enviarNota(request, idNFE):
+    context = {}
+    NFE = NF.objects.get(idNFE=idNFE)
+    json = Gerarjson(NFE)
+
+    form = FormGerarNota(request.POST or None, instance=NFE)
+
+    if form.is_valid():        
+        return redirect('/notasGeradas/')
+    else:
+        context = {
+            'form': FormGerarNota()
+        }
+    
+    return render(request, 'crudNotasGeradas.html', context)
+        
