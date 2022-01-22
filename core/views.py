@@ -1,7 +1,10 @@
+from re import template
 from this import d
 from django.shortcuts import render, redirect
 from .control import Gerarjson
 
+# Importando módulo para não necessitar da verificação csrf
+from django.views.decorators.csrf import csrf_exempt
 # Importando model
 from .models import tbNOTAFISCAL as NF
 # Importando form
@@ -38,6 +41,17 @@ def notasGeradas(request):
     }
     # Retornando os parâmetros do Request
     return render(request, template_name, context)
+
+@csrf_exempt
+def abrirModalEnviarNota(request, idNFE):
+    context = {}
+    form = NF.objects.get(idNFE=idNFE)
+    template_Name = ''
+    context = {
+        "form": form
+    }
+
+    return render(request, template_Name, context)
 
 
 def enviarNota(request, idNFE):

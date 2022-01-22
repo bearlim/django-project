@@ -4,21 +4,16 @@ $('BODY').on('click', 'table#tbNotasGeradas #btConsulta', function () {
     alert(idNFE);
 });
 
-$('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function(){    
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/enviarNota",
-    //     data: {
-    //         idNFE: $(this).attr('data-id')
-    //     },        
-    //     success: function (response) {
-            
-    //     }
-    // });
+$('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function () {
+    let modal = $(this).attr('data-bs-target'),
+        idNFE = $(this).attr('data-id');
 
-    $.post("/enviarNota/" + $(this).attr('data-id'), {idNFE: $(this).attr('data-id')},
-        function (data, textStatus, jqXHR) {
-            alert("funcionou");
-        },        
-    );
+    $.ajax({
+        type: "POST",
+        url: "/ModalEnviarNota/" + idNFE,
+        data: idNFE,        
+        success: function (response) {
+            $(modal).modal('show');
+        }
+    });
 });

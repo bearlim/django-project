@@ -1,4 +1,4 @@
-.container_edit{
+.container_edit{    
     border-radius: 25px;
 }
 
@@ -12,12 +12,11 @@
 }
 
 .botao {
-    padding:  6px 4px 4px 4px !important;
+    padding:  8px 6px 6px 6px !important;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    background: #fff;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);    
 }
 
 #slogan {
@@ -31,7 +30,7 @@
 }
 
 footer{
-    bottom: 0;
-    position: absolute;
+    bottom: 0;    
+    position: absolute;    
     width: 100%;
 }
