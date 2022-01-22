@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('gerarNota/', views.gerarNota, name='gerarNota'),
     path('notasGeradas/', views.notasGeradas, name='notasGeradas'),
-    path('notasGeradas/enviarNota', views.enviarNota, name='enviarNota'),
+    path('enviarNota/<int:idNFE>', views.enviarNota, name='enviarNota'),
 ]
