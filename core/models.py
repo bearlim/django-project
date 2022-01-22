@@ -30,6 +30,7 @@ class tbNOTAFISCAL(models.Model):
 
     #Dados do Tomador    
     cdCPFTomador = models.CharField('CPF do Tomador', max_length = 255)
+    nmTomador = models.CharField('Nome do Tomador', max_length = 150, null = True)    
     cdCEPTomador = models.CharField('CEP do Tomador', max_length = 150)
     dsTipoLogradouroTomador = models.CharField('Tipo logradouro do Tomador', max_length = 50)
     dsEnderecoTomador = models.CharField('Endereço do Tomador', max_length = 255)
