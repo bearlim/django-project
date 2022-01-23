@@ -4,16 +4,48 @@ $('BODY').on('click', 'table#tbNotasGeradas #btConsulta', function () {
     alert(idNFE);
 });
 
+// Evento para enviar o id para o modal
 $('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function () {
-    let modal = $(this).attr('data-bs-target'),
-        idNFE = $(this).attr('data-id');
+    let idNFE = $(this).attr('data-id');
+        
+    $('#btEnviarNota').attr('data-id', idNFE);
+});
+
+
+
+// Evento para enviar requisão para envio de nota 
+$('BODY').on('click', '#modalEnviarNota #btEnviarNota', function(){
+    let idNFE = $(this).attr('data-id');
 
     $.ajax({
-        type: "GET",
-        url: "/ModalEnviarNotaV2/" + idNFE,
-        data: idNFE,        
+        type: "POST",
+        url: "/enviarJson/" + idNFE,
         success: function (response) {
-            $(modal).modal('show');
+            
         }
     });
 });
+
+function mostrarNotificacao(tipo, titulo, texto) {
+    var opts = {
+        title: titulo,
+        text: texto,
+        addclass: 'stack-bottomright',
+        styling: 'bootstrap',
+    };
+    switch (tipo) {
+        case 'erro':
+            opts.delay = '2800';
+            opts.type = 'error';
+            break;
+        case 'info':
+            opts.delay = '3000';
+            opts.type = 'info';
+            break;
+        case 'sucesso':
+            opts.delay = '900';
+            opts.type = 'success';
+            break;
+    }
+    $.pnotify(opts);
+}
