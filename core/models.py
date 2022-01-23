@@ -20,8 +20,8 @@ class tbNOTAFISCAL(models.Model):
     cdTributacao = models.CharField('Código de Tributação', max_length = 150, blank=True)
     dsDiscriminacao = models.CharField(max_length = 150)
     cdCNAE = models.CharField('Código CNAE',max_length = 150, blank=True)    
-    vrServico = models.DecimalField('Valor do Serviço', max_digits=12, decimal_places=2)
-    vrLiquido = models.DecimalField('Valor líquido do Serviço', max_digits=12, decimal_places=2)
+    vrServico = models.FloatField('Valor do Serviço')
+    vrLiquido = models.FloatField('Valor líquido do Serviço')
 
     # Dados do prestador
     cdCNPJPrestador = models.CharField('CNPJ do Prestador',max_length = 255)
