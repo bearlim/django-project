@@ -1,12 +1,15 @@
+from asyncio.windows_events import NULL
 from re import template
 from this import d
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .control import Gerarjson
 from django.urls import reverse
 from django.views.generic import DetailView
 from django.views.decorators.csrf import csrf_exempt
+from django.forms import modelformset_factory as FS
 from .models import tbNOTAFISCAL as NF
-from .forms import FormGerarNota
+from .forms import FormGerarNota, global_fields, global_widgets
 
 app_name = "core"
 
@@ -30,47 +33,32 @@ def gerarNota(request):
     return render(request, 'crudGerarNotas.html', context)
 
 # Função irá puxar todas as notas que estão salvas no banco de dados
-def notasGeradas(request):
-    # Buscando as notas
-    notasGeradas = NF.objects.all()
-    # Definindo o nome do template
+def notasGeradas(request, idNFE=NULL):
+    notasGeradas = NF.objects.all()    
     template_name = 'crudNotasGeradas.html'
-    # Adicionando contexto
+    formX = FS(NF, fields=global_fields, widgets=global_widgets, exclude=('idNFE',))    
+    form = formX(queryset=NF.objects.filter(idNFE=idNFE))
     context = {
-        'notasGeradas': notasGeradas
+        'notasGeradas': notasGeradas,
+        'form': form[0]
     }
-    # Retornando os parâmetros do Request
+
     return render(request, template_name, context)
 
 @csrf_exempt
-def abrirModalEnviarNota(request, idNFE):
-    context = {}
-    
-    form = NF.objects.get(idNFE = idNFE)
-    template_name = 'crudNotasGeradas.html'
+def mostrarDadosDaNota(request, idNFE):
+    formX = FS(NF, fields=global_fields, widgets=global_widgets, exclude=('idNFE',))    
+    form = formX(queryset=NF.objects.filter(idNFE=idNFE))
 
-    context = {
-        'form': form
-    }
-    return render(request, template_name, context)
+    return render(request, 'modalEnviarNota.html', {'form':form})
 
-class abrirModalEnviarNotaV2(DetailView):
-    model = NF
-    form = FormGerarNota
 
-    def get_form_kwargs(self):
-        kwargs = super(abrirModalEnviarNotaV2, self).get_form_kwargs()
-        kwargs['user'] = self.request.user.username
-        return kwargs
+@csrf_exempt
+def enviarJsonPlugNotas(request, idNFE):
+    NFS = NF.objects.filter(idNFE=idNFE)
+    json = Gerarjson(NFS)
 
-    def post(self, request, *args, **kwargs):
-        form = FormGerarNota(request.POST)
-        if form.is_valid():
-            post = self.get_object()
-            form.instance.user = request.user
-            form.instance.post = post
-            form.save()
-            return redirect(reverse("abrirModalEnviarNotaV2", args=[post.pk]))
+    return redirect("/notasGeradas/")
 
 
 def enviarNota(request, idNFE):

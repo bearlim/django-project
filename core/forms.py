@@ -3,6 +3,36 @@ from django import forms
 from django.forms import ModelForm, TextInput 
 from . import models
 
+
+global_fields = [
+            'cdServico',
+            'cdTributacao',
+            'dsDiscriminacao',
+            'cdCNAE',
+            'vrServico',
+            'vrLiquido',
+            'cdCNPJPrestador',
+            'cdCPFTomador',
+            'cdCEPTomador',
+            'dsTipoLogradouroTomador',
+            'dsEnderecoTomador',
+            'dsTipoBairroTomador',
+            'cdCidadeTomador',
+            'sgEstadoTomador',
+            'nrEnderecoTomador',
+            'dsBairroTomador'            
+        ]
+
+global_widgets = { }  
+for field in global_fields:
+    if field == 'cdCEPTomador':
+        global_widgets.update({field : TextInput(attrs={'class': 'form-control cdCEP'})})
+    elif field == 'vrServico' or field == 'vrLiquido':
+        global_widgets.update({field : TextInput(attrs={'class': 'form-control money', 'type' : 'number'})})
+    else:
+        global_widgets.update({field : TextInput(attrs={'class': 'form-control'})})
+
+
 class gerarNotaFiscal(forms.Form):
     cdServico = forms.CharField(label='Código de Serviço', max_length=150, \
         widget=forms.TextInput(attrs={'placeholder': 'Código de Serviço', 'class': 'form-control'}))

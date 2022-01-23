@@ -5,44 +5,44 @@ import json
 urlAPI = "https://api.sandbox.plugnotas.com.br/nfse"
 headerAPI = {'x-api-key': '2da392a6-79d2-4304-a8b7-959572c7e44d'}
 
-def Gerarjson(form):
+def Gerarjson(NFS):
     json = {
-        "idIntegracao": form.idNFE,
+        "idIntegracao": NFS.idNFE,
         "prestador": [
-            {"cpfCnpj": form.cdCNPJPrestador}
+            {"cpfCnpj": NFS.cdCNPJPrestador}
         ],
         "tomador": [
             {
-                "cpfCnpj": form.cdCPFTomador,
-                "razaoSocial": form.nmTomador,
+                "cpfCnpj": NFS.cdCPFTomador,
+                "razaoSocial": NFS.nmTomador,
                 "endereco": [
                     {
-                        "descricaoCidade": form.cdCidadeTomador,
-                        "cep": form.cdCEPTomador,
-                        "tipoLogradouro": form.dsTipoLogradouroTomador,
-                        "logradouro": form.dsEnderecoTomador,
-                        "tipoBairro": form.dsTipoBairroTomador,
-                        "codigoCidade": form.cdCidadeTomador,
-                        "estado": form.sgEstadoTomador,
-                        "numero": form.nrEnderecoTomador,
-                        "bairro": form.dsBairroTomador
+                        "descricaoCidade": NFS.cdCidadeTomador,
+                        "cep": NFS.cdCEPTomador,
+                        "tipoLogradouro": NFS.dsTipoLogradouroTomador,
+                        "logradouro": NFS.dsEnderecoTomador,
+                        "tipoBairro": NFS.dsTipoBairroTomador,
+                        "codigoCidade": NFS.cdCidadeTomador,
+                        "estado": NFS.sgEstadoTomador,
+                        "numero": NFS.nrEnderecoTomador,
+                        "bairro": NFS.dsBairroTomador
                     }
                 ]
             }
         ],
         "servico": [{
-            "codigo": form.cdServico,
-            "codigoTributacao": form.cdTributacao,
-            "discriminacao": form.dsDiscriminacao,
-            "cnae": form.cdCNAE,
+            "codigo": NFS.cdServico,
+            "codigoTributacao": NFS.cdTributacao,
+            "discriminacao": NFS.dsDiscriminacao,
+            "cnae": NFS.cdCNAE,
             "iss": [{
                 "tipoTributacao": 7,
                 "exigibilidade": 1,
                 "aliquota": 3
             }],
             "valor": [{
-                "servico": form.vrServico,
-                "liquido": form.vrLiquido
+                "servico": NFS.vrServico,
+                "liquido": NFS.vrLiquido
             }]
         }]
 
