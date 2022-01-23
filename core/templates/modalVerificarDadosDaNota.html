@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container container_edit bg-white text-dark p-5 m-10">
+    <h1>Verificar Nota</h1>
+    
+    <form action="">
+        <div class="row">
+
+
+            <div class="col-md-12 pt-2">
+                <div class="card border-warning">
+                  <div class="card-body">
+                    <h4 class="card-title">IMPORTANTE!</h4>
+                    <p class="card-text">NOTAS GERADAS NÃO POSSUEM VALOR FISCAL</p>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <hr>
+            </div>
+            
+            {% for field in form %}
+                <div class="col-md-6 p-3">
+                    <div class="form-group input-group">
+                        <span class="input-group-text">
+                            {{ field.label_tag }}
+                        </span>
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+                
+        </div>
+    </form>
+</div>
+{% endblock content %}
+    

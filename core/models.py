@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
+from django.urls import reverse
 
 class NotaFiscalManager(models.Manager):
     def pesquisar(self, query):
@@ -9,9 +10,6 @@ class NotaFiscalManager(models.Manager):
         )
 
 # Create your models here.
-class teste(models.Model):
-    idNFE = models.IntegerField(primary_key=True)
-    ds = models.CharField(max_length=150, blank=True, null=True)
 
 class tbNOTAFISCAL(models.Model):
     idNFE = models.IntegerField(primary_key=True)
@@ -48,6 +46,10 @@ class tbNOTAFISCAL(models.Model):
     flErro = models.BinaryField(null=True)
 
     objects = NotaFiscalManager()
+
+    def get_absolute_url(self):
+        return reverse('verificarNota', kwargs={'idNFE': self.idNFE})
+
 
     def __str__(self) -> str:
         return self.dsDiscriminacao

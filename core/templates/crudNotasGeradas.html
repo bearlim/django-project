@@ -20,6 +20,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>                    
@@ -31,7 +32,8 @@
                             <td>{{ notaGerada.vrLiquido }}</td>
                             <td>{{ notaGerada.dtEmissao }}</td>
                             <td>{{ notaGerada.dsStatus }}</td>                                                        
-                            <td class="botao"> <a data-bs-toggle="modal" data-bs-target="#modalEnviarNota"> <div id="btEnviarJson" data-target="#modalEnviarNota" data-id="{{ notaGerada.idNFE }}" title="Enviar JSON"  ><i class="fa fa-arrow-alt-circle-right"></i> </div></a></td>
+                            <td class="botao"> <a href="{{ notaGerada.get_absolute_url }}" target="_blank"> <div id="btVerificarNota" data-id="{{ notaGerada.idNFE }}" title="Enviar JSON"  ><i class="fa fa-question-circle"></i> </div></a></td>
+                            <td class="botao"> <div id="btEnviarJson" data-id="{{ notaGerada.idNFE }}" title="Enviar Nota!"> <i class="fa fa-location-arrow"></i> </div> </td>
                             <td class="botao"> <div id="btConsulta" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorono }}" title="Pesquisar situação"><i class="fa fa-search"></i> <i class="fa fa-chevron-right" style="font-size:  12px;"></i> <i class="fa fa-file-excel"></i></div> </td>
                             <td class="botao"> <div id="btBaixarPDF" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorono }}" title="Baixar PDF"><i class="fas fa-file-pdf"></i></div> </td>
                             <td class="botao"> <div id="btBaixarXML" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorono }}" title="Baixar XML"><i class="fa fa-cloud-download-alt"></i></div> </td>
@@ -43,5 +45,4 @@
         </div>
     </div>
 
-{% include 'modalEnviarNota.html' %}
 {% endblock content %}

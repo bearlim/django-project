@@ -5,16 +5,22 @@ $('BODY').on('click', 'table#tbNotasGeradas #btConsulta', function () {
 });
 
 // Evento para enviar o id para o modal
-$('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function () {
+$('BODY').on('click', '#tbNotasGeradas #btVerificarNota', function () {
     let idNFE = $(this).attr('data-id');
         
-    $('#btEnviarNota').attr('data-id', idNFE);
+    $.ajax({
+        type: "GET",
+        url: "/verificarNota/" + idNFE,
+        success: function (response) {
+            
+        }
+    });
 });
 
 
 
 // Evento para enviar requisão para envio de nota 
-$('BODY').on('click', '#modalEnviarNota #btEnviarNota', function(){
+$('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function(){
     let idNFE = $(this).attr('data-id');
 
     $.ajax({

@@ -1,6 +1,3 @@
-from asyncio.windows_events import NULL
-from re import template
-from this import d
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .control import Gerarjson
@@ -10,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.forms import modelformset_factory as FS
 from .models import tbNOTAFISCAL as NF
 from .forms import FormGerarNota, global_fields, global_widgets
+from django.views.generic import DetailView
 
 app_name = "core"
 
@@ -33,14 +31,14 @@ def gerarNota(request):
     return render(request, 'crudGerarNotas.html', context)
 
 # Função irá puxar todas as notas que estão salvas no banco de dados
-def notasGeradas(request, idNFE=NULL):
+def notasGeradas(request, idNFE=None):
     notasGeradas = NF.objects.all()    
     template_name = 'crudNotasGeradas.html'
     formX = FS(NF, fields=global_fields, widgets=global_widgets, exclude=('idNFE',))    
     form = formX(queryset=NF.objects.filter(idNFE=idNFE))
+    
     context = {
-        'notasGeradas': notasGeradas,
-        'form': form[0]
+        'notasGeradas': notasGeradas
     }
 
     return render(request, template_name, context)
@@ -50,12 +48,12 @@ def mostrarDadosDaNota(request, idNFE):
     formX = FS(NF, fields=global_fields, widgets=global_widgets, exclude=('idNFE',))    
     form = formX(queryset=NF.objects.filter(idNFE=idNFE))
 
-    return render(request, 'modalEnviarNota.html', {'form':form})
+    return render(request, 'modalVerificarDadosDaNota.html', {'form':form[0]})
 
 
 @csrf_exempt
 def enviarJsonPlugNotas(request, idNFE):
-    NFS = NF.objects.filter(idNFE=idNFE)
+    NFS = NF.objects.get(idNFE=idNFE)
     json = Gerarjson(NFS)
 
     return redirect("/notasGeradas/")
