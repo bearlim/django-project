@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .control import Gerarjson
+from .control import *
 from django.urls import reverse
 from django.views.generic import DetailView
 from django.views.decorators.csrf import csrf_exempt
@@ -55,9 +55,14 @@ def mostrarDadosDaNota(request, idNFE):
 def enviarJsonPlugNotas(request, idNFE):
     NFS = NF.objects.get(idNFE=idNFE)
     json = Gerarjson(NFS)
-
+    idRetorno = enviarJsonV2(json)
+    inserirIdRetorno(idRetorno, NFS)
+        
     return redirect("/notasGeradas/")
 
+@csrf_exempt
+def pesquisarStatus(request, idRetorno,):
+    NFS = NF.objects.get()
 
 def enviarNota(request, idNFE):
     context = {}
