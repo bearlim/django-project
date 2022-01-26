@@ -1,9 +1,3 @@
-$('BODY').on('click', 'table#tbNotasGeradas #btConsulta', function () {
-    let idNFE = $(this).attr('data-id');
-
-    alert(idNFE);
-});
-
 // Evento para enviar o id para o modal
 $('BODY').on('click', '#tbNotasGeradas #btVerificarNota', function () {
     let idNFE = $(this).attr('data-id');
@@ -31,6 +25,34 @@ $('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function(){
         }
     });
 });
+
+
+// Evento para enviar requisção de status 
+$('BODY').on('click', '#tbNotasGeradas #btConsulta', function(){
+    let idRetorno = $(this).attr('data-idretorno');
+
+    $.ajax({
+        type: "GET",
+        url: '/statusNota/' + idRetorno,
+        success: function(response){
+            document.location.reload(true);
+        }
+    });
+});
+
+$('BODY').on('click', '#tbNotasGeradas #btBaixarPDF', function(){
+    let idRetorno = $(this).attr('data-idretorno');
+
+    $.ajax({
+        type: "GET",
+        url: "/baixarPDF/" + idRetorno,
+        success: function(response){
+            document.location.reload(true);
+        }
+    });
+});
+
+
 
 function mostrarNotificacao(tipo, titulo, texto) {
     var opts = {
