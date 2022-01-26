@@ -36,7 +36,6 @@ def notasGeradas(request, idNFE=None):
     template_name = 'crudNotasGeradas.html'
     formX = FS(NF, fields=global_fields, widgets=global_widgets, exclude=('idNFE',))    
     form = formX(queryset=NF.objects.filter(idNFE=idNFE))
-    
     context = {
         'notasGeradas': notasGeradas
     }
@@ -55,28 +54,27 @@ def mostrarDadosDaNota(request, idNFE):
 def enviarJsonPlugNotas(request, idNFE):
     NFS = NF.objects.get(idNFE=idNFE)
     json = Gerarjson(NFS)
-    idRetorno = enviarJsonV2(json)
+    idRetorno = enviarJson(json)
     inserirIdRetorno(idRetorno, NFS)
         
     return redirect("/notasGeradas/")
 
 @csrf_exempt
-def pesquisarStatus(request, idRetorno,):
-    NFS = NF.objects.get()
+def pesquisarStatus(request, idRetorno):
+    NFS = NF.objects.get(idRetorno=idRetorno)
+    dsStatus = verificarStatusNota(idRetorno)
+    NFS.dsStatus = dsStatus
+    NFS.save()
 
-def enviarNota(request, idNFE):
-    context = {}
-    NFE = NF.objects.get(idNFE=idNFE)
-    json = Gerarjson(NFE)
+    return redirect('/notasGeradas/')
 
-    form = FormGerarNota(request.POST or None, instance=NFE)
 
-    if form.is_valid():        
-        return redirect('/notasGeradas/')
-    else:
-        context = {
-            'form': FormGerarNota()
-        }
-    
-    return render(request, 'crudNotasGeradas.html', context)
+@csrf_exempt
+def baixarPDF(request, idRetorno):
+    NFS = NF.objects.get(idRetorno=idRetorno)
+    urlPDF = getPDF(idRetorno)
+    NFS.urlPDF = urlPDF
+    NFS.save()
+
+    return redirect('/notasGeradas/')
         
