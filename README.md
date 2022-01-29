@@ -14,7 +14,7 @@ It's a tool to make NFSe, but this don't any true value. It's for educational pu
 <h2>Get Started</h2>
 
 ```shell
-$ pip venv venv 
+$ python -m venv venv 
 $ source venv/bin/activate
 $ pip install -r requeriments
 $ python manage.py runserver
