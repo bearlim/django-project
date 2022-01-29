@@ -88,7 +88,7 @@ def verificarStatusNota(idRetorno):
 
 
 def getPDF(idRetorno):
-    direct = str(settings.BASE_DIR) + '/pdfNotas/'
+    direct = str(settings.BASE_DIR) + '/staticfiles/pdfNotas/'
     urlPDF = f"{direct}{idRetorno}.pdf"
     url = ""
     
@@ -102,7 +102,7 @@ def getPDF(idRetorno):
             pdf.write(r.data)
         return urlPDF
     else: 
-        os.mkdir(f"{settings.BASE_DIR}/pdfNotas")
+        os.mkdir(f"{settings.BASE_DIR}/staticfiles/pdfNotas")
         r = http.request(
             "GET",
             f"{urlAPI}/pdf/{idRetorno}",
