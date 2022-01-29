@@ -2,12 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .control import *
 from django.urls import reverse
-from django.views.generic import DetailView
 from django.views.decorators.csrf import csrf_exempt
 from django.forms import modelformset_factory as FS
 from .models import tbNOTAFISCAL as NF
 from .forms import FormGerarNota, global_fields, global_widgets
-from django.views.generic import DetailView
+from django.conf import settings
 
 app_name = "core"
 
@@ -76,5 +75,4 @@ def baixarPDF(request, idRetorno):
     NFS.urlPDF = urlPDF
     NFS.save()
 
-    return redirect('/notasGeradas/')
         

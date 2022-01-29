@@ -40,6 +40,7 @@ $('BODY').on('click', '#tbNotasGeradas #btConsulta', function(){
     });
 });
 
+// Evento para baixar PDF 
 $('BODY').on('click', '#tbNotasGeradas #btBaixarPDF', function(){
     let idRetorno = $(this).attr('data-idretorno');
 
@@ -52,7 +53,17 @@ $('BODY').on('click', '#tbNotasGeradas #btBaixarPDF', function(){
     });
 });
 
+// Evento para visualizar o PDF
+$('BODY').on('click', '#tbNotasGeradas #btVisualizarPDF', function(){
+    let idRetorno = $(this).attr('data-idretorno');
 
+    $.ajax({
+        type: "GET",
+        url: "/visualizarPDF/" + idRetorno,
+        success: function(response){
+        }
+    });
+});
 
 function mostrarNotificacao(tipo, titulo, texto) {
     var opts = {
