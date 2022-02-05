@@ -21,7 +21,7 @@ $('BODY').on('click', '#tbNotasGeradas #btEnviarJson', function(){
         type: "POST",
         url: "/enviarJson/" + idNFE,
         success: function (response) {
-            
+            document.location.reload(true);            
         }
     });
 });
