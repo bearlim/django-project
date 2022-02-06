@@ -75,4 +75,17 @@ def baixarPDF(request, idRetorno):
     NFS.urlPDF = urlPDF
     NFS.save()
 
-        
+
+@csrf_exempt
+def baixarXML(request, idRetorno):
+    NFS = NF.objects.get(idRetorno=idRetorno)
+    urlXML = get_xml(idRetorno)
+    NFS.urlXML = urlXML
+    NFS.save()
+    
+    return redirect("/notasGeradas/")
+
+
+@csrf_exempt
+def solicitarCancelamento(request, idRetorno):
+    NFS = NF.objects.get(idRetorno=idRetorno)

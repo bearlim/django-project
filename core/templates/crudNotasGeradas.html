@@ -41,8 +41,12 @@
                             {% else %}
                                 <td class="botao"> <a href="{% static 'pdfNotas/' %}{{ notaGerada.idRetorno }}.pdf" target="_blank"><div id="" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorno }}" title="Visualizar PDF"><i class="fas fa-file-pdf"></i></div></a> </td>                                
                             {% endif %}
-                            <td class="botao"> <div id="btBaixarXML" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorno }}" title="Baixar XML"><i class="fa fa-cloud-download-alt"></i></div> </td>
-                            <td class="botao"> <div id="btExcluirNota" class="" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorno }}" title="Excluir Nota"><i class="fa fa-times"></i></div> </td>
+                            {% if notaGerada.urlXML == None %}
+                                <td class="botao"> <div id="btBaixarXML" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorno }}" title="Baixar XML"><i class="fa fa-cloud-download-alt"></i></div> </td>
+                            {% else %}
+                                <td class="botao"> <a href="{% static 'xmlNotas/' %}{{ notaGerada.idRetorno }}.xml" target="_blank"><div id="" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorno }}" title="Visualizar XML"><i class="fas fa-file"></i></div></a> </td>
+                            {% endif %}
+                            <td class="botao"> <div id="btCancelarNota" class="" data-id="{{ notaGerada.idNFE }}" data-idretorno="{{ notaGerada.idRetorno }}" title="Cancelar Nota"><i class="fa fa-times"></i></div> </td>
                         </tr>
                     {% endfor %}                        
                 </tbody>

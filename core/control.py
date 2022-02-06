@@ -112,3 +112,27 @@ def getPDF(idRetorno):
             pdf.write(r.data)
         return urlPDF
 
+def get_xml(idRetorno):
+    direct = str(settings.BASE_DIR) + '/staticfiles/xmlNotas/'
+    urlXML = f"{direct}{idRetorno}.xml"
+    url = ""
+
+    if os.path.isdir(direct):
+        r = http.request(
+            "GET",
+            f"{urlAPI}/xml/{idRetorno}",
+            headers=headerAPI
+        )
+        with open(urlXML, "wb") as xml:
+            xml.write(r.data)
+        return urlXML
+    else:
+        os.mkdir(f"{settings.BASE_DIR}/staticfiles/xmlNotas")
+        r = http.request(
+            "GET",
+            f"{urlAPI}/xml/{idRetorno}",
+            headers=headerAPI
+        )
+        with open(urlXML, "wb") as xml:
+            xml.write(r.data)
+        return urlXML

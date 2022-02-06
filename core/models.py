@@ -44,6 +44,8 @@ class tbNOTAFISCAL(models.Model):
     dtEmissao = models.DateTimeField(auto_now_add=True, null=True)
     dsStatus = models.CharField(max_length=100, null=True)
     flErro = models.BinaryField(null=True)
+    dsProtocoloCancelamento = models.CharField(max_length=255)
+    flCancelada = models.BinaryField(null=True)
 
     objects = NotaFiscalManager()
 

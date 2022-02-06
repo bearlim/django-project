@@ -65,6 +65,32 @@ $('BODY').on('click', '#tbNotasGeradas #btVisualizarPDF', function(){
     });
 });
 
+// Evento para baixar XML
+$('BODY').on('click', '#tbNotasGeradas #btBaixarXML', function(){
+    let idRetorno = $(this).attr('data-idretorno');
+
+    $.ajax({
+        type: "GET",
+        url: "/visualizarXML/" + idRetorno,
+        success: function(response){
+            document.location.reload(true);
+        }
+    });
+});
+
+// Evento para solicitar cancelamento da nota
+$('BODY').on('click', '#tbNotasGeradas #btCancelarNota', function() {
+    let idRetorno = $(this).attr('data-idretorno');
+
+    $.ajax({
+        type: "GET",
+        url: "/solicitarCancelamento/" + idRetorno,
+        success: function() {
+            document.location.reload(true);
+        }
+    })
+})
+
 function mostrarNotificacao(tipo, titulo, texto) {
     var opts = {
         title: titulo,
